@@ -19,6 +19,7 @@ docker build --build-arg IMAGE_ARCH=linux/arm64 -t torizon/rt-validation-rt rt-t
 
 
 # Run the tests (on target machine)
-
+```
 docker run --rm -it --privileged -v /dev:/dev -v /tmp:/tmp -v /media/$USER/YOUR-USB-DISK-MOUNTPOINT:/mnt/pendrive torizon/rt-validation-stress
 docker run --rm -it --privileged -v /dev:/dev -v /tmp:/tmp torizon/rt-validation-rt
+```
