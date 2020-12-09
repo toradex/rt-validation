@@ -4,7 +4,9 @@ ARG IMAGE_TAG=2-bullseye
 FROM --platform=$IMAGE_ARCH torizon/debian:$IMAGE_TAG
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends rt-tests \
+    && apt-get install -y --no-install-recommends gnuplot rt-tests \
     && rm -rf /var/lib/apt/lists/*
 
-CMD ["cyclictest","-S","-p99","-i1000","-m","-D20m", "-q", "|", "tee", "cyclictest.log"]
+COPY rt-tests.sh /rt-tests.sh
+
+CMD ["/rt-tests.sh"]
