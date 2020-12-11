@@ -4,9 +4,9 @@ ARG IMAGE_TAG=2-bullseye
 FROM --platform=$IMAGE_ARCH torizon/debian:$IMAGE_TAG
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends iperf3 rt-tests \
+    && apt-get install -y --no-install-recommends iperf3 rt-tests iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 
-COPY / /
+COPY stress-tests.sh /stress-tests.sh
 
 CMD ["/stress-tests.sh"]
