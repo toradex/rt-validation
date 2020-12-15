@@ -169,7 +169,7 @@ docker-build-stress-tests-multiarch:
   - docker pull ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${GITLAB_DOCKERREGISTRY_SUFFIX}
   - docker tag ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${GITLAB_DOCKERREGISTRY_SUFFIX} ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}:${MAJOR}
   - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PW
-  - docker push ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}
+  - docker push ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}:${MAJOR}
 
 docker-deploy-rt-tests-major:
   extends: .docker-deploy-major
@@ -210,7 +210,7 @@ docker-deploy-stress-tests-arm64-major:
   - docker pull ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${GITLAB_DOCKERREGISTRY_SUFFIX}
   - docker tag ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${GITLAB_DOCKERREGISTRY_SUFFIX} ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}:${MAJOR}.${MINOR}
   - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PW
-  - docker push ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}
+  - docker push ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}:${MAJOR}.${MINOR}
 
 docker-deploy-rt-tests-minor:
   extends: .docker-deploy-minor
@@ -257,7 +257,7 @@ docker-deploy-stress-tests-arm64-minor:
   - docker pull ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${GITLAB_DOCKERREGISTRY_SUFFIX}
   - docker tag ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${GITLAB_DOCKERREGISTRY_SUFFIX} ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}:${MAJOR}.${MINOR}.${PATCH}
   - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PW
-  - (if [ ${RESULT} == 1 ] ; then docker push ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME} ; else echo Image with this tag already exists. ; fi)
+  - (if [ ${RESULT} == 1 ] ; then docker push ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}:${MAJOR}.${MINOR}.${PATCH} ; else echo Image with this tag already exists. ; fi)
 
 docker-deploy-rt-tests-patch:
   extends: .docker-deploy-patch
@@ -309,7 +309,7 @@ docker-deploy-stress-tests-arm64-patch:
   - docker pull ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${GITLAB_DOCKERREGISTRY_SUFFIX}
   - docker tag ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${GITLAB_DOCKERREGISTRY_SUFFIX} ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}:${MAJOR}.${MINOR}.${PATCH}-${DATE}
   - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PW
-  - (if [ ${RESULT} == 1 ] ; then docker push ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME} ; else echo Image with this tag already exists. ; fi)
+  - (if [ ${RESULT} == 1 ] ; then docker push ${DOCKER_HUB_REPOSITORY}/${IMAGE_NAME}:${MAJOR}.${MINOR}.${PATCH}-${DATE} ; else echo Image with this tag already exists. ; fi)
 
 docker-deploy-rt-tests-patch-date:
   extends: .docker-deploy-patch-date
