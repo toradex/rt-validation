@@ -58,7 +58,7 @@ RT stress tests started successfully!
 Run the following command to execute the `rt-tests` container and start measuring the latency:
 
 ```
-$ docker run --rm -it --name rt-tests --cap-add=sys_nice --cap-add=ipc_lock --cap-add=sys_rawio --ulimit rtprio=99 --device-cgroup-rule='c 10:62 rmw' -v /dev:/dev -v /tmp:/tmp torizon/rt-tests:$CT_TAG_RT_TESTS
+$ docker run --rm -it --name rt-tests --cap-add=sys_nice --cap-add=ipc_lock --cap-add=sys_rawio --ulimit rtprio=99 --device-cgroup-rule='c 10:* rmw' -v /dev:/dev -v /tmp:/tmp torizon/rt-tests:$CT_TAG_RT_TESTS
 ```
 
 The tests will run for at most 12 hours, but can be interrupted at any time by pressing CTRL-C.
