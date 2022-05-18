@@ -4,11 +4,11 @@ variables:
   IMAGE_TAG_DEBIAN: "2-bullseye"
 
   RT_TESTS_MAJOR: "2"
-  RT_TESTS_MINOR: "3"
+  RT_TESTS_MINOR: "4"
   RT_TESTS_PATCH: "0"
 
   STRESS_TESTS_MAJOR: "2"
-  STRESS_TESTS_MINOR: "3"
+  STRESS_TESTS_MINOR: "4"
   STRESS_TESTS_PATCH: "0"
 
   # This should be set by docker image already, just to be sure...
