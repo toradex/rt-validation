@@ -41,7 +41,7 @@ $ ls /mnt/pendrive/file.tar
 Run the following command to execute the `stress-tests` container:
 
 ```
-$ docker run --rm -d --name stress-tests --privileged -v /dev:/dev -v /tmp:/tmp -v /mnt/pendrive/:/mnt/pendrive torizon/stress-tests:$CT_TAG_STRESS_TESTS
+$ docker run --rm -d --name stress-tests --privileged -v /mnt/pendrive/:/mnt/pendrive torizon/stress-tests:$CT_TAG_STRESS_TESTS
 ```
 
 Check if the stress tests started successfully:
@@ -58,7 +58,7 @@ RT stress tests started successfully!
 Run the following command to execute the `rt-tests` container and start measuring the latency:
 
 ```
-$ docker run --rm -it --name rt-tests --cap-add=sys_nice --cap-add=ipc_lock --cap-add=sys_rawio --ulimit rtprio=99 --device-cgroup-rule='c 10:* rmw' -v /dev:/dev -v /tmp:/tmp torizon/rt-tests:$CT_TAG_RT_TESTS
+$ docker run --rm -it --name rt-tests --cap-add=ipc_lock --ulimit rtprio=99 -v /tmp:/tmp torizon/rt-tests:$CT_TAG_RT_TESTS
 ```
 
 The tests will run for at most 12 hours, but can be interrupted at any time by
@@ -102,7 +102,7 @@ A latency plot from cyclictest histogram data will be available in `/tmp/latency
 Running the `rt-tests` container on a non-PREEMPT_RT version of TorizonCore may be useful to compare the results with the PREEMPT_RT version. But if you try to run, the execution might fail:
 
 ```
-$ docker run --rm -it --name rt-tests --cap-add=sys_nice --cap-add=ipc_lock --cap-add=sys_rawio --ulimit rtprio=99 --device-cgroup-rule='c 10:* rmw' -v /dev:/dev -v /tmp:/tmp torizon/rt-tests:$CT_TAG_RT_TESTS
+$ docker run --rm -it --name rt-tests --cap-add=ipc_lock --ulimit rtprio=99 -v /tmp:/tmp torizon/rt-tests:$CT_TAG_RT_TESTS
 Unable to change scheduling policy!
 Probably missing capabilities, either run as root or increase RLIMIT_RTPRIO limits.
 ERROR: cyclictest failed
@@ -114,5 +114,5 @@ So if you want to run the `rt-tests` container on a non-PREEMPT_RT version of To
 
 ```
 sudo sh -c "echo 950000 > /sys/fs/cgroup/cpu,cpuacct/docker/cpu.rt_runtime_us"
-docker run --rm -it --name rt-tests --cpu-rt-runtime=950000 --cap-add=sys_nice --cap-add=ipc_lock --cap-add=sys_rawio --ulimit rtprio=99 --device-cgroup-rule='c 10:* rmw' -v /dev:/dev -v /tmp:/tmp torizon/rt-tests:$CT_TAG_RT_TESTS
+docker run --rm -it --name rt-tests --cpu-rt-runtime=950000 --cap-add=ipc_lock --ulimit rtprio=99 -v /tmp:/tmp torizon/rt-tests:$CT_TAG_RT_TESTS
 ```
