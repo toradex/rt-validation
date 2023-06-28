@@ -16,8 +16,7 @@ grep -v -e "^#" -e "^$" output | tr " " "\t" >histogram
 cores=$(grep -c ^processor /proc/cpuinfo)
 for i in `seq 1 $cores`
 do
-  column=`expr $i + 1`
-  cut -f1,$column histogram >histogram$i
+  cut -f1,$(( $i + 1 )) histogram >histogram$i
 done
 
 # Create plot command header
@@ -38,7 +37,7 @@ do
   then
     echo -n ", " >>plotcmd
   fi
-  cpuno=`expr $i - 1`
+  cpuno=$(( $i - 1 ))
   if test $cpuno -lt 10
   then
     title=" CPU$cpuno"
