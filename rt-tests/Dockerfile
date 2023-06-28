@@ -3,8 +3,9 @@ ARG IMAGE_ARCH=linux/arm
 ARG IMAGE_TAG=2-bullseye
 FROM --platform=$IMAGE_ARCH torizon/debian:$IMAGE_TAG
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends gnuplot rt-tests \
+RUN apt update \
+    && apt install -y --no-install-recommends gnuplot rt-tests \
+    && apt clean
     && rm -rf /var/lib/apt/lists/*
 
 COPY rt-tests.sh /rt-tests.sh
