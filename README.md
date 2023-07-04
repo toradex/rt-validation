@@ -112,3 +112,6 @@ So if you want to run the `rt-tests` container on a non-PREEMPT_RT version of To
 sudo sh -c "echo 950000 > /sys/fs/cgroup/cpu,cpuacct/docker/cpu.rt_runtime_us"
 docker run --rm -it --name rt-tests --cpu-rt-runtime=950000 --cap-add=sys_nice --cap-add=ipc_lock --cap-add=sys_rawio --ulimit rtprio=99 --device-cgroup-rule='c 10:* rmw' -v /dev:/dev -v /tmp:/tmp torizon/rt-tests:$CT_TAG_RT_TESTS
 ```
+
+# License
+This project is licensed under the terms of MIT license - see `LICENSE`.
