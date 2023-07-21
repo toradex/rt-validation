@@ -1,3 +1,7 @@
+# DEPRECATED
+This repository has been incorporated into
+[toradex/torizon-containers](https://github.com/toradex/torizon-containers).
+
 # rt-validation
 
 Containers to validate real-time (`PREEMPT_RT`) support in TorizonCore.
